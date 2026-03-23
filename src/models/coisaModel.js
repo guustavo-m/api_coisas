@@ -10,7 +10,7 @@ function listarTodos() {
   // Retornamos uma Promise porque a operação é assíncrona
   return new Promise((resolve, reject) => {
     // SQL: SELECT busca todos os registros
-    const sql = 'SELECT * FROM coisas';
+    const sql = 'SELECT * FROM Coisa';
     
     // db.all() busca múltiplas linhas
     // [] são os parâmetros (vazio neste caso)
@@ -34,7 +34,7 @@ function buscarPorId(id) {
   return new Promise((resolve, reject) => {
     // O '?' é um placeholder seguro
     // Isso previne SQL Injection!
-    const sql = 'SELECT * FROM coisas WHERE id = ?';
+    const sql = 'SELECT * FROM Coisa WHERE id = ?';
     
     // db.get() busca uma única linha
     db.get(sql, [id], (erro, linha) => {
@@ -62,7 +62,7 @@ function criar(dados) {
     // IMPORTANTE: NÃO incluímos o ID aqui porque ele é AUTOINCREMENT
     // O SQLite gera o ID automaticamente!
     const sql = `
-      INSERT INTO coisas (nomec, tipoc, valor, dtcoisa, qtdc)
+      INSERT INTO Coisa (nomec, tipoc, valor, dtcoisa, qtdc)
       VALUES (?, ?, ?, ?, ?)
     `;
     
@@ -112,7 +112,7 @@ function atualizar(id, dados) {
     
     // SQL: UPDATE modifica um registro existente
     const sql = `
-      UPDATE coisas 
+      UPDATE Coisa 
       SET nomec = ?, tipoc = ?, valor = ?, dtcoisa = ?, qtdc = ?
       WHERE id = ?
     `;
@@ -142,7 +142,7 @@ function atualizar(id, dados) {
 function deletar(id) {
   return new Promise((resolve, reject) => {
     // SQL: DELETE remove um registro
-    const sql = 'DELETE FROM coisas WHERE id = ?';
+    const sql = 'DELETE FROM Coisa WHERE id = ?';
     
     db.run(sql, [id], function(erro) {
       if (erro) {
@@ -165,7 +165,7 @@ function buscarPorNome(categoria) {
   return new Promise((resolve, reject) => {
     // LIKE permite busca com padrão
     // O % significa "qualquer texto antes/depois"
-    const sql = 'SELECT * FROM coisas WHERE categoria LIKE ?';
+    const sql = 'SELECT * FROM Coisa WHERE categoria LIKE ?';
     
     db.all(sql, [`%${categoria}%`], (erro, linhas) => {
       if (erro) {

@@ -3,7 +3,7 @@ const path = require('path');
 
 // Caminho do arquivo do banco de dados
 // __dirname = diretório atual do arquivo
-const dbPath = path.resolve(__dirname, '../config/database.db');
+const dbPath = path.resolve(__dirname, '../config/coisa.db');
 
 // Criar/abrir a conexão com o banco
 const db = new sqlite3.Database(dbPath, (erro) => {
@@ -17,7 +17,7 @@ const db = new sqlite3.Database(dbPath, (erro) => {
 
 db.serialize(() => {
   db.run(`
-      create table if not exists coisas (
+      create table if not exists Coisa (
       id integer primary key autoincrement not null,
       nomec varchar(50) not null,
       tipoc varchar(30) not null,
